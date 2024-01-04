@@ -70,6 +70,7 @@
 			this.buttonEdit.TabIndex = 2;
 			this.buttonEdit.Text = "Редактировать";
 			this.buttonEdit.UseVisualStyleBackColor = false;
+			this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
 			// 
 			// buttonDelete
 			// 
@@ -82,6 +83,7 @@
 			this.buttonDelete.TabIndex = 3;
 			this.buttonDelete.Text = "Удалить";
 			this.buttonDelete.UseVisualStyleBackColor = false;
+			this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
 			// 
 			// AirlinesView
 			// 

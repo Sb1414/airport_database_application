@@ -28,6 +28,22 @@ namespace airport
 			this.AcceptButton = buttonOk;
 		}
 
+		public AirportAddView(string city, string name, string code)
+		{
+			InitializeComponent();
+
+			textBoxCity.Text = city;
+			textBoxName.Text = name;
+			textBoxCode.Text = code;
+			textBoxCity.ForeColor = Color.FromArgb(230, 179, 51);
+			textBoxName.ForeColor = Color.FromArgb(230, 179, 51);
+			textBoxCode.ForeColor = Color.FromArgb(230, 179, 51);
+
+			buttonOk.Text = "обновить";
+			buttonOk.DialogResult = DialogResult.OK;
+			this.AcceptButton = buttonOk;
+		}
+
 		public string City => textBoxCity.Text;
 		public string Code => textBoxCode.Text;
 		public string AirName => textBoxName.Text;

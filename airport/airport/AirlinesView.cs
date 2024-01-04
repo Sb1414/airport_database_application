@@ -90,5 +90,89 @@ namespace airport
 				MessageBox.Show(ex.Message, "ошибка", MessageBoxButtons.OK);
 			}
 		}
+
+		private void buttonEdit_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewAirlines.CurrentRow == null)
+				{
+					throw new Exception("не выбран аэропорт");
+				}
+				int id = Convert.ToInt32(dataGridViewAirlines.CurrentRow.Cells["Id"].Value);
+				string city = dataGridViewAirlines.CurrentRow.Cells["City"].Value.ToString();
+				string name = dataGridViewAirlines.CurrentRow.Cells["Name"].Value.ToString();
+				string code = dataGridViewAirlines.CurrentRow.Cells["Code"].Value.ToString();
+
+				AirportAddView add = new AirportAddView(city, name, code);
+
+				if (add.ShowDialog() == DialogResult.OK)
+				{
+					name = add.AirName;
+					code = add.Code;
+					city = add.City;
+
+					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+					{
+						connection.Open();
+						using (SQLiteCommand cmd = new SQLiteCommand(
+							"UPDATE Airports SET City = @City, Name = @Name, Code = @Code WHERE Id = @id", connection))
+						{
+							cmd.Parameters.AddWithValue("@City", city);
+							cmd.Parameters.AddWithValue("@Name", name);
+							cmd.Parameters.AddWithValue("@Code", code);
+							cmd.Parameters.AddWithValue("@id", id);
+							int rowsUpdated = cmd.ExecuteNonQuery();
+							if (rowsUpdated > 0)
+							{
+								LoadAirports();
+							}
+							else
+							{
+								MessageBox.Show("ошибка обновления данных");
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+		private void buttonDelete_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewAirlines.CurrentRow != null)
+				{
+					DialogResult res = MessageBox.Show("Точно удалить аэропорт?", "Предупреждение", MessageBoxButtons.OKCancel);
+					if (res == DialogResult.OK)
+					{
+						int id = Convert.ToInt32(dataGridViewAirlines.CurrentRow.Cells["Id"].Value);
+
+						using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+						{
+							connection.Open();
+							using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Airports WHERE Id = @id", connection))
+							{
+								cmd.Parameters.AddWithValue("@id", id);
+								cmd.ExecuteNonQuery();
+							}
+						}
+						LoadAirports();
+					}
+				}
+				else
+				{
+					throw new Exception("Не выбран аэропорт");
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "ошибка", MessageBoxButtons.OK);
+			}
+		}
 	}
 }
