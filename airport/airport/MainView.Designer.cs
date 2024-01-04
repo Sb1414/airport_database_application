@@ -33,22 +33,22 @@
 			// 
 			// buttonAirlines
 			// 
-			this.buttonAirlines.Location = new System.Drawing.Point(192, 146);
+			this.buttonAirlines.Location = new System.Drawing.Point(46, 41);
 			this.buttonAirlines.Name = "buttonAirlines";
-			this.buttonAirlines.Size = new System.Drawing.Size(131, 63);
+			this.buttonAirlines.Size = new System.Drawing.Size(203, 63);
 			this.buttonAirlines.TabIndex = 0;
-			this.buttonAirlines.Text = "авиакомпнии";
+			this.buttonAirlines.Text = "Аэропорты";
 			this.buttonAirlines.UseVisualStyleBackColor = true;
 			this.buttonAirlines.Click += new System.EventHandler(this.buttonAirlines_Click);
 			// 
-			// Form1
+			// MainView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(894, 522);
 			this.Controls.Add(this.buttonAirlines);
-			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Name = "MainView";
+			this.Text = "Авиакомпания";
 			this.ResumeLayout(false);
 
 		}
