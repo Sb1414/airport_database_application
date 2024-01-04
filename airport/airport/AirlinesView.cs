@@ -20,16 +20,17 @@ namespace airport
 		public AirlinesView()
 		{
 			InitializeComponent();
-			LoadAirlines();
+			LoadAirports();
+			dataGridViewAirlines.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 		}
 
-		private void LoadAirlines()
+		private void LoadAirports()
 		{
 			using (SQLiteConnection connection = new SQLiteConnection(connectionString))
 			{
 				connection.Open();
 
-				string query = "SELECT * FROM Airlines";
+				string query = "SELECT * FROM Airports";
 
 				using (SQLiteCommand cmd = new SQLiteCommand(query, connection))
 				{
@@ -40,14 +41,54 @@ namespace airport
 						dataGridViewAirlines.DataSource = dt;
 					}
 					dataGridViewAirlines.Columns["Id"].Visible = false;
-					dataGridViewAirlines.Columns["Name"].HeaderText = "Название";
+					dataGridViewAirlines.Columns["City"].HeaderText = "Город";
+					dataGridViewAirlines.Columns["Name"].HeaderText = "Название аэропорта";
 					dataGridViewAirlines.Columns["Code"].HeaderText = "Код";
 				}
 			}
-			/*if (dataGridViewAirlines.Rows.Count > 0)
+		}
+
+		private void buttonAdd_Click(object sender, EventArgs e)
+		{
+			try
 			{
-				dataGridViewAirlines_CellClick(dataGridViewAirlines, new DataGridViewCellEventArgs(0, 0));
-			}*/
+				AirportAddView add = new AirportAddView();
+
+				if (add.ShowDialog() == DialogResult.OK)
+				{
+					string name = add.AirName;
+					string code = add.Code;
+					string city = add.City;
+
+					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+					{
+						connection.Open();
+						using (SQLiteCommand cmd = new SQLiteCommand(
+							"INSERT INTO Airports (City, Name, Code) " +
+							"VALUES (@City, @Name, @Code)",
+							connection))
+						{
+							cmd.Parameters.AddWithValue("@City", city);
+							cmd.Parameters.AddWithValue("@Name", name);
+							cmd.Parameters.AddWithValue("@Code", code);
+
+							int rowsUpdated = cmd.ExecuteNonQuery();
+							if (rowsUpdated > 0)
+							{
+								LoadAirports();
+							}
+							else
+							{
+								MessageBox.Show("ошибка добавления данных");
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "ошибка", MessageBoxButtons.OK);
+			}
 		}
 	}
 }
