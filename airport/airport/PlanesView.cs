@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,24 +12,23 @@ using System.Windows.Forms;
 
 namespace airport
 {
-	public partial class AirlinesView : Form
+	public partial class PlanesView : Form
 	{
 		string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-		public AirlinesView()
+		public PlanesView()
 		{
 			InitializeComponent();
-			LoadAirports();
-			dataGridViewAirlines.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			LoadPlanes();
+			dataGridViewPlanes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 		}
 
-		private void LoadAirports()
+		private void LoadPlanes()
 		{
 			using (SQLiteConnection connection = new SQLiteConnection(connectionString))
 			{
 				connection.Open();
 
-				string query = "SELECT * FROM Airports";
+				string query = "SELECT * FROM Planes";
 
 				using (SQLiteCommand cmd = new SQLiteCommand(query, connection))
 				{
@@ -38,12 +36,11 @@ namespace airport
 					{
 						DataTable dt = new DataTable();
 						adapter.Fill(dt);
-						dataGridViewAirlines.DataSource = dt;
+						dataGridViewPlanes.DataSource = dt;
 					}
-					dataGridViewAirlines.Columns["Id"].Visible = false;
-					dataGridViewAirlines.Columns["City"].HeaderText = "Город";
-					dataGridViewAirlines.Columns["Name"].HeaderText = "Название аэропорта";
-					dataGridViewAirlines.Columns["Code"].HeaderText = "Код";
+					dataGridViewPlanes.Columns["Id"].Visible = false;
+					dataGridViewPlanes.Columns["Model"].HeaderText = "Модель";
+					dataGridViewPlanes.Columns["Capacity"].HeaderText = "Количество посадочных мест";
 				}
 			}
 		}
@@ -52,30 +49,28 @@ namespace airport
 		{
 			try
 			{
-				AirportAddView add = new AirportAddView();
+				PlanesAddView add = new PlanesAddView();
 
 				if (add.ShowDialog() == DialogResult.OK)
 				{
-					string name = add.AirName;
-					string code = add.Code;
-					string city = add.City;
+					string model = add.Model;
+					int capacity = add.Capacity;
 
 					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
 					{
 						connection.Open();
 						using (SQLiteCommand cmd = new SQLiteCommand(
-							"INSERT INTO Airports (City, Name, Code) " +
-							"VALUES (@City, @Name, @Code)",
+							"INSERT INTO Planes (Model, Capacity) " +
+							"VALUES (@Model, @Capacity)",
 							connection))
 						{
-							cmd.Parameters.AddWithValue("@City", city);
-							cmd.Parameters.AddWithValue("@Name", name);
-							cmd.Parameters.AddWithValue("@Code", code);
+							cmd.Parameters.AddWithValue("@Model", model);
+							cmd.Parameters.AddWithValue("@Capacity", capacity);
 
 							int rowsUpdated = cmd.ExecuteNonQuery();
 							if (rowsUpdated > 0)
 							{
-								LoadAirports();
+								LoadPlanes();
 							}
 							else
 							{
@@ -95,37 +90,34 @@ namespace airport
 		{
 			try
 			{
-				if (dataGridViewAirlines.CurrentRow == null)
+				if (dataGridViewPlanes.CurrentRow == null)
 				{
-					throw new Exception("не выбран аэропорт");
+					throw new Exception("не выбран самолёт");
 				}
-				int id = Convert.ToInt32(dataGridViewAirlines.CurrentRow.Cells["Id"].Value);
-				string city = dataGridViewAirlines.CurrentRow.Cells["City"].Value.ToString();
-				string name = dataGridViewAirlines.CurrentRow.Cells["Name"].Value.ToString();
-				string code = dataGridViewAirlines.CurrentRow.Cells["Code"].Value.ToString();
+				int id = Convert.ToInt32(dataGridViewPlanes.CurrentRow.Cells["Id"].Value);
+				string model = dataGridViewPlanes.CurrentRow.Cells["Model"].Value.ToString();
+				int capacity = Convert.ToInt32(dataGridViewPlanes.CurrentRow.Cells["Capacity"].Value);
 
-				AirportAddView add = new AirportAddView(city, name, code);
+				PlanesAddView add = new PlanesAddView(model, capacity);
 
 				if (add.ShowDialog() == DialogResult.OK)
 				{
-					name = add.AirName;
-					code = add.Code;
-					city = add.City;
+					model = add.Model;
+					capacity = add.Capacity;
 
 					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
 					{
 						connection.Open();
 						using (SQLiteCommand cmd = new SQLiteCommand(
-							"UPDATE Airports SET City = @City, Name = @Name, Code = @Code WHERE Id = @id", connection))
+							"UPDATE Planes SET Model = @Model, Capacity = @Capacity WHERE Id = @id", connection))
 						{
-							cmd.Parameters.AddWithValue("@City", city);
-							cmd.Parameters.AddWithValue("@Name", name);
-							cmd.Parameters.AddWithValue("@Code", code);
+							cmd.Parameters.AddWithValue("@Model", model);
+							cmd.Parameters.AddWithValue("@Capacity", capacity);
 							cmd.Parameters.AddWithValue("@id", id);
 							int rowsUpdated = cmd.ExecuteNonQuery();
 							if (rowsUpdated > 0)
 							{
-								LoadAirports();
+								LoadPlanes();
 							}
 							else
 							{
@@ -145,28 +137,28 @@ namespace airport
 		{
 			try
 			{
-				if (dataGridViewAirlines.CurrentRow != null)
+				if (dataGridViewPlanes.CurrentRow != null)
 				{
-					DialogResult res = MessageBox.Show("Точно удалить аэропорт?", "Предупреждение", MessageBoxButtons.OKCancel);
+					DialogResult res = MessageBox.Show("Точно удалить самолёт?", "Предупреждение", MessageBoxButtons.OKCancel);
 					if (res == DialogResult.OK)
 					{
-						int id = Convert.ToInt32(dataGridViewAirlines.CurrentRow.Cells["Id"].Value);
+						int id = Convert.ToInt32(dataGridViewPlanes.CurrentRow.Cells["Id"].Value);
 
 						using (SQLiteConnection connection = new SQLiteConnection(connectionString))
 						{
 							connection.Open();
-							using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Airports WHERE Id = @id", connection))
+							using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Planes WHERE Id = @id", connection))
 							{
 								cmd.Parameters.AddWithValue("@id", id);
 								cmd.ExecuteNonQuery();
 							}
 						}
-						LoadAirports();
+						LoadPlanes();
 					}
 				}
 				else
 				{
-					throw new Exception("Не выбран аэропорт");
+					throw new Exception("Не выбран самолёт");
 				}
 			}
 			catch (Exception ex)
@@ -179,12 +171,12 @@ namespace airport
 		{
 			try
 			{
-				DataView dv = ((DataTable)dataGridViewAirlines.DataSource).DefaultView;
-				dv.RowFilter = $"City LIKE '%{textBoxSearch.Text}%' OR Name LIKE '%{textBoxSearch.Text}%' OR Code LIKE '%{textBoxSearch.Text}%'";				
+				DataView dv = ((DataTable)dataGridViewPlanes.DataSource).DefaultView;
+				dv.RowFilter = $"Model LIKE '%{textBoxSearch.Text}%'";
 			}
 			catch (Exception)
 			{
-				LoadAirports();
+				LoadPlanes();
 			}
 		}
 	}

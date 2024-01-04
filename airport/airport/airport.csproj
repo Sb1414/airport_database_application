@@ -84,6 +84,18 @@
     <Compile Include="MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlanesAddView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlanesAddView.Designer.cs">
+      <DependentUpon>PlanesAddView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlanesView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlanesView.Designer.cs">
+      <DependentUpon>PlanesView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AirlinesView.resx">
@@ -94,6 +106,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlanesAddView.resx">
+      <DependentUpon>PlanesAddView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlanesView.resx">
+      <DependentUpon>PlanesView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

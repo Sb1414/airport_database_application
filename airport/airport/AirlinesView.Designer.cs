@@ -32,6 +32,7 @@
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.buttonEdit = new System.Windows.Forms.Button();
 			this.buttonDelete = new System.Windows.Forms.Button();
+			this.textBoxSearch = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirlines)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -85,11 +86,22 @@
 			this.buttonDelete.UseVisualStyleBackColor = false;
 			this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
 			// 
+			// textBoxSearch
+			// 
+			this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textBoxSearch.Location = new System.Drawing.Point(565, 465);
+			this.textBoxSearch.Name = "textBoxSearch";
+			this.textBoxSearch.Size = new System.Drawing.Size(266, 20);
+			this.textBoxSearch.TabIndex = 6;
+			this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
+			// 
 			// AirlinesView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(843, 522);
+			this.Controls.Add(this.textBoxSearch);
 			this.Controls.Add(this.buttonDelete);
 			this.Controls.Add(this.buttonEdit);
 			this.Controls.Add(this.buttonAdd);
@@ -99,6 +111,7 @@
 			this.Text = "Аэропорты";
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewAirlines)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -108,5 +121,6 @@
 		private System.Windows.Forms.Button buttonAdd;
 		private System.Windows.Forms.Button buttonEdit;
 		private System.Windows.Forms.Button buttonDelete;
+		private System.Windows.Forms.TextBox textBoxSearch;
 	}
 }
