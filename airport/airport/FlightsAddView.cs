@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace airport
 {
@@ -19,6 +20,8 @@ namespace airport
 		{
 			this.connectionString = connectionString;
 			InitializeComponent();
+			comboBoxDepartureAirport.Enabled = false;
+			textBoxDepartureAirport.Enabled = false;
 			AddDepartureAirportMap();
 			AddArrivalAirportMap();
 
@@ -36,12 +39,12 @@ namespace airport
 		{
 			if (checkBox1.Checked)
 			{
-				comboBoxDepartureAirport.Enabled = false;
-				textBoxDepartureAirport.Enabled = false;
-			} else
-			{
 				comboBoxDepartureAirport.Enabled = true;
 				textBoxDepartureAirport.Enabled = true;
+			} else
+			{
+				comboBoxDepartureAirport.Enabled = false;
+				textBoxDepartureAirport.Enabled = false;
 			}
 		}
 
@@ -89,8 +92,10 @@ namespace airport
 				};
 
 				// установка выбранного элемента с id равным 1
-				comboBoxDepartureAirport.SelectedIndex = 1;
-				
+				if (comboBoxDepartureAirport.Items.Count > 0)
+				{
+					comboBoxDepartureAirport.SelectedValue = 1;
+				}
 			}
 		}
 
