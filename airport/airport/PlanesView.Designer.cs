@@ -34,7 +34,7 @@
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.dataGridViewPlanes = new System.Windows.Forms.DataGridView();
 			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.button1 = new System.Windows.Forms.Button();
+			this.buttonDeleteFlight = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.dataGridViewFlights = new System.Windows.Forms.DataGridView();
@@ -112,17 +112,18 @@
 			this.textBox1.Size = new System.Drawing.Size(179, 20);
 			this.textBox1.TabIndex = 21;
 			// 
-			// button1
+			// buttonDeleteFlight
 			// 
-			this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.button1.FlatAppearance.BorderSize = 0;
-			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button1.Location = new System.Drawing.Point(597, 95);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(179, 40);
-			this.button1.TabIndex = 20;
-			this.button1.Text = "Удалить рейс";
-			this.button1.UseVisualStyleBackColor = false;
+			this.buttonDeleteFlight.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonDeleteFlight.FlatAppearance.BorderSize = 0;
+			this.buttonDeleteFlight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonDeleteFlight.Location = new System.Drawing.Point(597, 95);
+			this.buttonDeleteFlight.Name = "buttonDeleteFlight";
+			this.buttonDeleteFlight.Size = new System.Drawing.Size(179, 40);
+			this.buttonDeleteFlight.TabIndex = 20;
+			this.buttonDeleteFlight.Text = "Удалить рейс";
+			this.buttonDeleteFlight.UseVisualStyleBackColor = false;
+			this.buttonDeleteFlight.Click += new System.EventHandler(this.buttonDeleteFlight_Click);
 			// 
 			// button2
 			// 
@@ -135,6 +136,7 @@
 			this.button2.TabIndex = 19;
 			this.button2.Text = "Редактировать рейс";
 			this.button2.UseVisualStyleBackColor = false;
+			this.button2.Click += new System.EventHandler(this.editFlight_Click);
 			// 
 			// button3
 			// 
@@ -166,7 +168,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(788, 430);
 			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.buttonDeleteFlight);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.dataGridViewFlights);
@@ -193,7 +195,7 @@
 		private System.Windows.Forms.Button buttonAdd;
 		private System.Windows.Forms.DataGridView dataGridViewPlanes;
 		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button buttonDeleteFlight;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.DataGridView dataGridViewFlights;

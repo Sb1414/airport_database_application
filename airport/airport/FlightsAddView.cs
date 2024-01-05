@@ -30,6 +30,46 @@ namespace airport
 			this.AcceptButton = buttonOk;
 		}
 
+		public FlightsAddView(string connectionString, int DepartureAirportID, int ArrivalAirportID, string DepartureTime, string ArrivalTime)
+		{
+			this.connectionString = connectionString;
+			InitializeComponent();
+			comboBoxDepartureAirport.Enabled = false;
+			textBoxDepartureAirport.Enabled = false;
+
+			AddDepartureAirportMap();
+			AddArrivalAirportMap();
+
+			if (DepartureAirportID != -1 && comboBoxDepartureAirport.Items.Count > 0)
+			{
+				comboBoxDepartureAirport.SelectedValue = DepartureAirportID;
+			}
+			if (ArrivalAirportID != -1 && comboBoxArrivalAirport.Items.Count > 0)
+			{
+				comboBoxArrivalAirport.SelectedValue = ArrivalAirportID;
+			}
+
+			// парсинг и установка даты и времени для вылета
+			DateTime departureDateTime;
+			if (DateTime.TryParse(DepartureTime, out departureDateTime))
+			{
+				departureDay.Value = departureDateTime.Date;
+				departureTime.Value = departureDateTime;
+			}
+
+			// парсинг и установка даты и времени для прибытия
+			DateTime arrivalDateTime;
+			if (DateTime.TryParse(ArrivalTime, out arrivalDateTime))
+			{
+				arrivalDay.Value = arrivalDateTime.Date;
+				arrivalTime.Value = arrivalDateTime;
+			}
+
+			buttonOk.Text = "добавить";
+			buttonOk.DialogResult = DialogResult.OK;
+			this.AcceptButton = buttonOk;
+		}
+
 		public string DepartureTime => $"{departureDay.Value:yyyy-MM-dd} {departureTime.Value:HH:mm:ss}";
 		public string ArrivalTime => $"{arrivalDay.Value:yyyy-MM-dd} {arrivalTime.Value:HH:mm:ss}";
 		public int idDeparture => comboBoxDepartureAirport.SelectedItem != null ? (int)comboBoxDepartureAirport.SelectedValue : -1;

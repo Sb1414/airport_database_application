@@ -282,5 +282,84 @@ namespace airport
 				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
 			}
 		}
+
+		private void editFlight_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewFlights.CurrentRow == null)
+				{
+					throw new Exception("Не выбран рейс для редактирования");
+				}
+				int plane_id = Convert.ToInt32(dataGridViewPlanes.CurrentRow.Cells["Id"].Value);
+				int id = Convert.ToInt32(dataGridViewFlights.CurrentRow.Cells["Id"].Value);
+				int DepartureAirportID = Convert.ToInt32(dataGridViewFlights.CurrentRow.Cells["DepartureAirportID"].Value);
+				int ArrivalAirportID = Convert.ToInt32(dataGridViewFlights.CurrentRow.Cells["ArrivalAirportID"].Value);
+				string DepartureTime = dataGridViewFlights.CurrentRow.Cells["DepartureTime"].Value?.ToString();
+				string ArrivalTime = dataGridViewFlights.CurrentRow.Cells["ArrivalTime"].Value?.ToString();
+
+				FlightsAddView add = new FlightsAddView(connectionString, DepartureAirportID, ArrivalAirportID, DepartureTime, ArrivalTime);
+				if (add.ShowDialog() == DialogResult.OK)
+				{
+					DepartureAirportID = add.idDeparture;
+					ArrivalAirportID = add.idArrival;
+					DepartureTime = add.DepartureTime;
+					ArrivalTime = add.ArrivalTime;
+
+					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+					{
+						connection.Open();
+						using (SQLiteCommand cmd = new SQLiteCommand(
+							"UPDATE Flights SET PlaneID = @PlaneID, DepartureAirportID = @DepartureAirportID, ArrivalAirportID = @ArrivalAirportID, " +
+							"DepartureTime = @DepartureTime, ArrivalTime = @ArrivalTime WHERE Id = @id", connection))
+						{
+							cmd.Parameters.AddWithValue("@DepartureAirportID", DepartureAirportID);
+							cmd.Parameters.AddWithValue("@PlaneID", plane_id);
+							cmd.Parameters.AddWithValue("@ArrivalAirportID", ArrivalAirportID);
+							cmd.Parameters.AddWithValue("@DepartureTime", DepartureTime);
+							cmd.Parameters.AddWithValue("@ArrivalTime", ArrivalTime);
+							cmd.Parameters.AddWithValue("@id", id);
+
+							cmd.ExecuteNonQuery();
+						}
+						LoadPlanes();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+		private void buttonDeleteFlight_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewFlights.CurrentRow == null)
+				{
+					throw new Exception("не выбран рейс");
+				}
+				DialogResult res = MessageBox.Show("Точно удалить рейс?", "Предупреждение", MessageBoxButtons.OKCancel);
+				if (res == DialogResult.OK)
+				{
+					int id = Convert.ToInt32(dataGridViewFlights.CurrentRow.Cells["Id"].Value);
+					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+					{
+						connection.Open();
+						using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Flights WHERE Id = @id", connection))
+						{
+							cmd.Parameters.AddWithValue("@id", id);
+							cmd.ExecuteNonQuery();
+						}
+					}
+					LoadPlanes();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "ошибка", MessageBoxButtons.OK);
+			}
+		}
 	}
 }
