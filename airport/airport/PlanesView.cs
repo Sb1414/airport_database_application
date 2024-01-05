@@ -247,11 +247,33 @@ namespace airport
 
 				int plane_id = Convert.ToInt32(dataGridViewPlanes.CurrentRow.Cells["Id"].Value);
 
-				FlightsAddView add = new FlightsAddView();
+				FlightsAddView add = new FlightsAddView(connectionString);
 
 				if (add.ShowDialog() == DialogResult.OK)
 				{
-					
+					int DepartureAirportID = add.idDeparture;
+					int ArrivalAirportID = add.idArrival;
+					string DepartureTime = add.DepartureTime;
+					string ArrivalTime = add.ArrivalTime;
+
+					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+					{
+						connection.Open();
+
+						using (SQLiteCommand cmd = new SQLiteCommand(
+							"INSERT INTO Flights (PlaneID, DepartureAirportID, ArrivalAirportID, DepartureTime, ArrivalTime) " +
+							"VALUES (@PlaneID, @DepartureAirportID, @ArrivalAirportID, @DepartureTime, @ArrivalTime)", connection))
+						{
+							cmd.Parameters.AddWithValue("@DepartureAirportID", DepartureAirportID);
+							cmd.Parameters.AddWithValue("@PlaneID", plane_id);
+							cmd.Parameters.AddWithValue("@ArrivalAirportID", ArrivalAirportID);
+							cmd.Parameters.AddWithValue("@DepartureTime", DepartureTime);
+							cmd.Parameters.AddWithValue("@ArrivalTime", ArrivalTime);
+
+							cmd.ExecuteNonQuery();
+						}
+						LoadPlanes();
+					}
 				}
 
 			}
