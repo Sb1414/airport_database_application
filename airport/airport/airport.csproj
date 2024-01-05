@@ -78,6 +78,12 @@
     <Compile Include="AirportAddView.Designer.cs">
       <DependentUpon>AirportAddView.cs</DependentUpon>
     </Compile>
+    <Compile Include="FlightsAddView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlightsAddView.Designer.cs">
+      <DependentUpon>FlightsAddView.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AirportAddView.resx">
       <DependentUpon>AirportAddView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlightsAddView.resx">
+      <DependentUpon>FlightsAddView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>

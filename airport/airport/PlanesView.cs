@@ -20,6 +20,7 @@ namespace airport
 			InitializeComponent();
 			LoadPlanes();
 			dataGridViewPlanes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dataGridViewFlights.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 		}
 
 		private void LoadPlanes()
@@ -42,6 +43,10 @@ namespace airport
 					dataGridViewPlanes.Columns["Model"].HeaderText = "Модель";
 					dataGridViewPlanes.Columns["Capacity"].HeaderText = "Количество посадочных мест";
 				}
+			}
+			if (dataGridViewPlanes.Rows.Count > 0)
+			{
+				dataGridViewPlanes_CellClick(dataGridViewPlanes, new DataGridViewCellEventArgs(0, 0));
 			}
 		}
 
@@ -177,6 +182,82 @@ namespace airport
 			catch (Exception)
 			{
 				LoadPlanes();
+			}
+		}
+
+		private void dataGridViewPlanes_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			try
+			{
+				if (e.RowIndex >= 0 && e.RowIndex < dataGridViewPlanes.Rows.Count)
+				{
+					int plane_id = Convert.ToInt32(dataGridViewPlanes.Rows[e.RowIndex].Cells["id"].Value);
+
+					string query = @"SELECT Flights.Id, DepartureAirportID, A1.City || ' (' || A1.Code || ')' AS DepartureAirport,
+									   ArrivalAirportID, A2.City || ' (' || A2.Code || ')' AS ArrivalAirport, DepartureTime, ArrivalTime
+									   FROM Flights
+								JOIN Airports A2 on A2.Id = Flights.ArrivalAirportID
+								JOIN Airports A1 on A1.Id = Flights.DepartureAirportID
+								JOIN Planes P on P.Id = Flights.PlaneID
+								WHERE PlaneID = @plane_id";
+
+					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+					{
+						connection.Open();
+
+						SQLiteCommand command = new SQLiteCommand(query, connection);
+						command.Parameters.AddWithValue("@plane_id", plane_id);
+
+						using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(command))
+						{
+							DataTable dt = new DataTable();
+							adapter.Fill(dt);
+
+							dataGridViewFlights.DataSource = dt;
+						}
+						colls();
+					}
+				}
+			}
+			catch (Exception)
+			{
+				dataGridViewFlights.DataSource = null;
+			}
+		}
+
+		private void colls()
+		{
+			dataGridViewFlights.Columns["Id"].Visible = false;
+			dataGridViewFlights.Columns["DepartureAirportID"].Visible = false;
+			dataGridViewFlights.Columns["ArrivalAirportID"].Visible = false;
+			dataGridViewFlights.Columns["DepartureAirport"].HeaderText = "Отправка из";
+			dataGridViewFlights.Columns["ArrivalAirport"].HeaderText = "Прибытие в";
+			dataGridViewFlights.Columns["DepartureTime"].HeaderText = "Время вылета";
+			dataGridViewFlights.Columns["ArrivalTime"].HeaderText = "Время прибытия";
+		}
+
+		private void addFlight_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewPlanes.CurrentRow == null)
+				{
+					throw new Exception("Не выбран самолёт для добавления рейса");
+				}
+
+				int plane_id = Convert.ToInt32(dataGridViewPlanes.CurrentRow.Cells["Id"].Value);
+
+				FlightsAddView add = new FlightsAddView();
+
+				if (add.ShowDialog() == DialogResult.OK)
+				{
+					
+				}
+
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
 			}
 		}
 	}
