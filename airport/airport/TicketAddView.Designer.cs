@@ -43,7 +43,7 @@
 			// 
 			// dataGridView1
 			// 
-			this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
 			this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Location = new System.Drawing.Point(12, 28);
@@ -74,7 +74,7 @@
 			// 
 			// buttonOk
 			// 
-			this.buttonOk.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonOk.FlatAppearance.BorderSize = 0;
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Location = new System.Drawing.Point(153, 291);
@@ -141,6 +141,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
 			this.ClientSize = new System.Drawing.Size(462, 336);
 			this.Controls.Add(this.numericUpDown1);
 			this.Controls.Add(this.comboBoxSeats);

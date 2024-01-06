@@ -44,8 +44,7 @@
 			// 
 			// buttonDeleteTicket
 			// 
-			this.buttonDeleteTicket.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.buttonDeleteTicket.FlatAppearance.BorderSize = 0;
+			this.buttonDeleteTicket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonDeleteTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonDeleteTicket.Location = new System.Drawing.Point(382, 470);
 			this.buttonDeleteTicket.Name = "buttonDeleteTicket";
@@ -57,8 +56,7 @@
 			// 
 			// button2
 			// 
-			this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.button2.FlatAppearance.BorderSize = 0;
+			this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button2.Location = new System.Drawing.Point(197, 470);
 			this.button2.Name = "button2";
@@ -70,8 +68,7 @@
 			// 
 			// buttonAddTicket
 			// 
-			this.buttonAddTicket.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.buttonAddTicket.FlatAppearance.BorderSize = 0;
+			this.buttonAddTicket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonAddTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAddTicket.Location = new System.Drawing.Point(12, 470);
 			this.buttonAddTicket.Name = "buttonAddTicket";
@@ -83,7 +80,8 @@
 			// 
 			// dataGridViewTickets
 			// 
-			this.dataGridViewTickets.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.dataGridViewTickets.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+			this.dataGridViewTickets.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.dataGridViewTickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewTickets.Location = new System.Drawing.Point(12, 260);
 			this.dataGridViewTickets.Name = "dataGridViewTickets";
@@ -100,11 +98,11 @@
 			this.textBoxSearch.Name = "textBoxSearch";
 			this.textBoxSearch.Size = new System.Drawing.Size(178, 20);
 			this.textBoxSearch.TabIndex = 26;
+			this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
 			// 
 			// buttonDelete
 			// 
-			this.buttonDelete.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.buttonDelete.FlatAppearance.BorderSize = 0;
+			this.buttonDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonDelete.Location = new System.Drawing.Point(380, 228);
 			this.buttonDelete.Name = "buttonDelete";
@@ -116,8 +114,7 @@
 			// 
 			// buttonEdit
 			// 
-			this.buttonEdit.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.buttonEdit.FlatAppearance.BorderSize = 0;
+			this.buttonEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonEdit.Location = new System.Drawing.Point(196, 228);
 			this.buttonEdit.Name = "buttonEdit";
@@ -129,8 +126,7 @@
 			// 
 			// buttonAdd
 			// 
-			this.buttonAdd.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.buttonAdd.FlatAppearance.BorderSize = 0;
+			this.buttonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAdd.Location = new System.Drawing.Point(12, 228);
 			this.buttonAdd.Name = "buttonAdd";
@@ -142,7 +138,8 @@
 			// 
 			// dataGridViewPassengers
 			// 
-			this.dataGridViewPassengers.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.dataGridViewPassengers.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+			this.dataGridViewPassengers.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.dataGridViewPassengers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewPassengers.Location = new System.Drawing.Point(12, 12);
 			this.dataGridViewPassengers.Name = "dataGridViewPassengers";
@@ -154,8 +151,7 @@
 			// 
 			// buttonPrintTicket
 			// 
-			this.buttonPrintTicket.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.buttonPrintTicket.FlatAppearance.BorderSize = 0;
+			this.buttonPrintTicket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonPrintTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonPrintTicket.Location = new System.Drawing.Point(567, 470);
 			this.buttonPrintTicket.Name = "buttonPrintTicket";
@@ -169,6 +165,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
 			this.ClientSize = new System.Drawing.Size(753, 501);
 			this.Controls.Add(this.buttonPrintTicket);
 			this.Controls.Add(this.buttonDeleteTicket);

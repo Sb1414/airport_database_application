@@ -33,11 +33,11 @@
 			this.buttonEdit = new System.Windows.Forms.Button();
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.dataGridViewPlanes = new System.Windows.Forms.DataGridView();
-			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.buttonDeleteFlight = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.dataGridViewFlights = new System.Windows.Forms.DataGridView();
+			this.label1 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewPlanes)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).BeginInit();
 			this.SuspendLayout();
@@ -46,7 +46,7 @@
 			// 
 			this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxSearch.Location = new System.Drawing.Point(413, 193);
+			this.textBoxSearch.Location = new System.Drawing.Point(598, 156);
 			this.textBoxSearch.Name = "textBoxSearch";
 			this.textBoxSearch.Size = new System.Drawing.Size(178, 20);
 			this.textBoxSearch.TabIndex = 11;
@@ -54,7 +54,7 @@
 			// 
 			// buttonDelete
 			// 
-			this.buttonDelete.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonDelete.FlatAppearance.BorderSize = 0;
 			this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonDelete.Location = new System.Drawing.Point(413, 95);
@@ -67,7 +67,7 @@
 			// 
 			// buttonEdit
 			// 
-			this.buttonEdit.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonEdit.FlatAppearance.BorderSize = 0;
 			this.buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonEdit.Location = new System.Drawing.Point(413, 49);
@@ -80,7 +80,7 @@
 			// 
 			// buttonAdd
 			// 
-			this.buttonAdd.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonAdd.FlatAppearance.BorderSize = 0;
 			this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonAdd.Location = new System.Drawing.Point(413, 3);
@@ -93,7 +93,8 @@
 			// 
 			// dataGridViewPlanes
 			// 
-			this.dataGridViewPlanes.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.dataGridViewPlanes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+			this.dataGridViewPlanes.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.dataGridViewPlanes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewPlanes.Location = new System.Drawing.Point(2, 3);
 			this.dataGridViewPlanes.Name = "dataGridViewPlanes";
@@ -103,18 +104,9 @@
 			this.dataGridViewPlanes.TabIndex = 7;
 			this.dataGridViewPlanes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPlanes_CellClick);
 			// 
-			// textBox1
-			// 
-			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBox1.Location = new System.Drawing.Point(597, 193);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(179, 20);
-			this.textBox1.TabIndex = 21;
-			// 
 			// buttonDeleteFlight
 			// 
-			this.buttonDeleteFlight.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonDeleteFlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonDeleteFlight.FlatAppearance.BorderSize = 0;
 			this.buttonDeleteFlight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonDeleteFlight.Location = new System.Drawing.Point(597, 95);
@@ -127,7 +119,7 @@
 			// 
 			// button2
 			// 
-			this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.button2.FlatAppearance.BorderSize = 0;
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button2.Location = new System.Drawing.Point(597, 49);
@@ -140,7 +132,7 @@
 			// 
 			// button3
 			// 
-			this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.button3.FlatAppearance.BorderSize = 0;
 			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button3.Location = new System.Drawing.Point(597, 3);
@@ -153,7 +145,8 @@
 			// 
 			// dataGridViewFlights
 			// 
-			this.dataGridViewFlights.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.dataGridViewFlights.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+			this.dataGridViewFlights.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.dataGridViewFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridViewFlights.Location = new System.Drawing.Point(2, 219);
 			this.dataGridViewFlights.Name = "dataGridViewFlights";
@@ -162,12 +155,22 @@
 			this.dataGridViewFlights.Size = new System.Drawing.Size(774, 204);
 			this.dataGridViewFlights.TabIndex = 17;
 			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(413, 156);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(178, 20);
+			this.label1.TabIndex = 24;
+			this.label1.Text = "Поиск самолета";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// PlanesView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
 			this.ClientSize = new System.Drawing.Size(788, 430);
-			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.buttonDeleteFlight);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button3);
@@ -194,10 +197,10 @@
 		private System.Windows.Forms.Button buttonEdit;
 		private System.Windows.Forms.Button buttonAdd;
 		private System.Windows.Forms.DataGridView dataGridViewPlanes;
-		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Button buttonDeleteFlight;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.DataGridView dataGridViewFlights;
+		private System.Windows.Forms.Label label1;
 	}
 }

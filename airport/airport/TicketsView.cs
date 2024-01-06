@@ -371,16 +371,36 @@ namespace airport
 
 		private void buttonPrintTicket_Click(object sender, EventArgs e)
 		{
-			if (dataGridViewTickets.CurrentRow != null)
+			try
 			{
-				int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["id"].Value);
+				if (dataGridViewTickets.CurrentRow != null)
+				{
+					int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["id"].Value);
 
-				OutView edit = new OutView(id, connectionString);
-				edit.ShowDialog();
+					OutView edit = new OutView(id, connectionString);
+					edit.ShowDialog();
+				}
+				else
+				{
+					throw new Exception("Не выбран билет для вывода посадочного талона");
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				throw new Exception("Не выбран билет для вывода посадочного талона");
+				MessageBox.Show(ex.Message, "ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+		private void textBoxSearch_TextChanged(object sender, EventArgs e)
+		{
+			try
+			{
+				DataView dv = ((DataTable)dataGridViewPassengers.DataSource).DefaultView;
+				dv.RowFilter = $"LastName LIKE '%{textBoxSearch.Text}%' OR FirstName LIKE '%{textBoxSearch.Text}%'";
+			}
+			catch (Exception)
+			{
+				LoadPassengers();
 			}
 		}
 	}

@@ -58,7 +58,7 @@
 			// 
 			// buttonOk
 			// 
-			this.buttonOk.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(202)))), ((int)(((byte)(244)))));
 			this.buttonOk.FlatAppearance.BorderSize = 0;
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonOk.Location = new System.Drawing.Point(105, 383);
@@ -202,6 +202,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
 			this.ClientSize = new System.Drawing.Size(373, 428);
 			this.Controls.Add(this.numericUpDown1);
 			this.Controls.Add(this.label5);
