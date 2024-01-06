@@ -28,8 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.buttonDeleteFlight = new System.Windows.Forms.Button();
+			this.buttonDeleteTicket = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.buttonAddTicket = new System.Windows.Forms.Button();
 			this.dataGridViewTickets = new System.Windows.Forms.DataGridView();
@@ -38,30 +37,23 @@
 			this.buttonEdit = new System.Windows.Forms.Button();
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.dataGridViewPassengers = new System.Windows.Forms.DataGridView();
+			this.buttonPrintTicket = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewTickets)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewPassengers)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// textBox1
+			// buttonDeleteTicket
 			// 
-			this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBox1.Location = new System.Drawing.Point(567, 470);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(179, 20);
-			this.textBox1.TabIndex = 31;
-			// 
-			// buttonDeleteFlight
-			// 
-			this.buttonDeleteFlight.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.buttonDeleteFlight.FlatAppearance.BorderSize = 0;
-			this.buttonDeleteFlight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonDeleteFlight.Location = new System.Drawing.Point(382, 470);
-			this.buttonDeleteFlight.Name = "buttonDeleteFlight";
-			this.buttonDeleteFlight.Size = new System.Drawing.Size(179, 26);
-			this.buttonDeleteFlight.TabIndex = 30;
-			this.buttonDeleteFlight.Text = "Удалить билет";
-			this.buttonDeleteFlight.UseVisualStyleBackColor = false;
+			this.buttonDeleteTicket.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonDeleteTicket.FlatAppearance.BorderSize = 0;
+			this.buttonDeleteTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonDeleteTicket.Location = new System.Drawing.Point(382, 470);
+			this.buttonDeleteTicket.Name = "buttonDeleteTicket";
+			this.buttonDeleteTicket.Size = new System.Drawing.Size(179, 26);
+			this.buttonDeleteTicket.TabIndex = 30;
+			this.buttonDeleteTicket.Text = "Удалить билет";
+			this.buttonDeleteTicket.UseVisualStyleBackColor = false;
+			this.buttonDeleteTicket.Click += new System.EventHandler(this.buttonDeleteTicket_Click);
 			// 
 			// button2
 			// 
@@ -74,6 +66,7 @@
 			this.button2.TabIndex = 29;
 			this.button2.Text = "Редактировать билет";
 			this.button2.UseVisualStyleBackColor = false;
+			this.button2.Click += new System.EventHandler(this.editTicket_Click);
 			// 
 			// buttonAddTicket
 			// 
@@ -159,13 +152,26 @@
 			this.dataGridViewPassengers.TabIndex = 22;
 			this.dataGridViewPassengers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPassengers_CellClick);
 			// 
+			// buttonPrintTicket
+			// 
+			this.buttonPrintTicket.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonPrintTicket.FlatAppearance.BorderSize = 0;
+			this.buttonPrintTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonPrintTicket.Location = new System.Drawing.Point(567, 470);
+			this.buttonPrintTicket.Name = "buttonPrintTicket";
+			this.buttonPrintTicket.Size = new System.Drawing.Size(179, 26);
+			this.buttonPrintTicket.TabIndex = 31;
+			this.buttonPrintTicket.Text = "Вывести посадочный";
+			this.buttonPrintTicket.UseVisualStyleBackColor = false;
+			this.buttonPrintTicket.Click += new System.EventHandler(this.buttonPrintTicket_Click);
+			// 
 			// TicketsView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(753, 501);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.buttonDeleteFlight);
+			this.Controls.Add(this.buttonPrintTicket);
+			this.Controls.Add(this.buttonDeleteTicket);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.buttonAddTicket);
 			this.Controls.Add(this.dataGridViewTickets);
@@ -185,9 +191,7 @@
 		}
 
 		#endregion
-
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.Button buttonDeleteFlight;
+		private System.Windows.Forms.Button buttonDeleteTicket;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button buttonAddTicket;
 		private System.Windows.Forms.DataGridView dataGridViewTickets;
@@ -196,5 +200,6 @@
 		private System.Windows.Forms.Button buttonEdit;
 		private System.Windows.Forms.Button buttonAdd;
 		private System.Windows.Forms.DataGridView dataGridViewPassengers;
+		private System.Windows.Forms.Button buttonPrintTicket;
 	}
 }

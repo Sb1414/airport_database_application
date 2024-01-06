@@ -66,7 +66,7 @@ namespace airport
 
 					string query = @"SELECT Tickets.Id, FlightID, A1.City || ' (' || A1.Code || ')' AS DepartureAirport, 
 									   A2.City || ' (' || A2.Code || ')' AS ArrivalAirport, F.DepartureTime, F.ArrivalTime,
-									   RowNumber || SC.NameSeat AS seat, (F.Price + SC.Price) AS TotalPrice, p2.Model, PassengerID, SeatID FROM Tickets
+									   RowNumber || SC.NameSeat AS seat, RowNumber, (F.Price + SC.Price) AS TotalPrice, p2.Model, PassengerID, SeatID FROM Tickets
 								JOIN Passengers P on P.Id = Tickets.PassengerID
 								JOIN Flights F on F.Id = Tickets.FlightID
 								JOIN Airports A1 on A1.Id = F.DepartureAirportID
@@ -105,6 +105,7 @@ namespace airport
 			dataGridViewTickets.Columns["FlightID"].Visible = false;
 			dataGridViewTickets.Columns["PassengerID"].Visible = false;
 			dataGridViewTickets.Columns["ArrivalTime"].Visible = false;
+			dataGridViewTickets.Columns["RowNumber"].Visible = false;
 			dataGridViewTickets.Columns["SeatID"].Visible = false;
 			dataGridViewTickets.Columns["DepartureAirport"].HeaderText = "Отправка из";
 			dataGridViewTickets.Columns["ArrivalAirport"].HeaderText = "Прибытие в";
@@ -263,7 +264,7 @@ namespace airport
 
 				int PassengerID = Convert.ToInt32(dataGridViewPassengers.CurrentRow.Cells["Id"].Value);
 				
-				TicketAddView add = new TicketAddView(connectionString);
+				TicketAddView add = new TicketAddView(connectionString, PassengerID);
 
 				if (add.ShowDialog() == DialogResult.OK)
 				{
@@ -289,11 +290,97 @@ namespace airport
 						LoadPassengers();
 					}
 				}
-
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+		private void editTicket_Click(object sender, EventArgs e)
+		{
+			
+				if (dataGridViewTickets.CurrentRow == null)
+				{
+					throw new Exception("Не выбран билет для редактирования");
+				}
+				int PassengerID = Convert.ToInt32(dataGridViewPassengers.CurrentRow.Cells["Id"].Value);
+				int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["Id"].Value);
+				int FlightID = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["FlightID"].Value);
+				int RowNumber = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["RowNumber"].Value);
+				int SeatID = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["SeatID"].Value);
+
+				TicketAddView add = new TicketAddView(connectionString, FlightID, RowNumber, SeatID);
+				if (add.ShowDialog() == DialogResult.OK)
+				{
+					FlightID = add.FlightsID;
+					RowNumber = add.SelectedRowNumber;
+					SeatID = add.SelectedSeatID;
+
+					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+					{
+						connection.Open();
+						using (SQLiteCommand cmd = new SQLiteCommand(
+							"UPDATE Tickets SET FlightID = @FlightID, PassengerID = @PassengerID, RowNumber = @RowNumber, " +
+							"SeatID = @SeatID WHERE Id = @id", connection))
+						{
+							cmd.Parameters.AddWithValue("@FlightID", FlightID);
+							cmd.Parameters.AddWithValue("@PassengerID", PassengerID);
+							cmd.Parameters.AddWithValue("@RowNumber", RowNumber);
+							cmd.Parameters.AddWithValue("@SeatID", SeatID);
+							cmd.Parameters.AddWithValue("@id", id);
+
+							cmd.ExecuteNonQuery();
+						}
+						LoadPassengers();
+					}
+				}
+			
+		}
+
+		private void buttonDeleteTicket_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewTickets.CurrentRow == null)
+				{
+					throw new Exception("не выбран билет");
+				}
+				DialogResult res = MessageBox.Show("Точно удалить билет?", "Предупреждение", MessageBoxButtons.OKCancel);
+				if (res == DialogResult.OK)
+				{
+					int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["Id"].Value);
+
+					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+					{
+						connection.Open();
+						using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Tickets WHERE Id = @id", connection))
+						{
+							cmd.Parameters.AddWithValue("@id", id);
+							cmd.ExecuteNonQuery();
+						}
+					}
+					LoadPassengers();
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+		private void buttonPrintTicket_Click(object sender, EventArgs e)
+		{
+			if (dataGridViewTickets.CurrentRow != null)
+			{
+				int id = Convert.ToInt32(dataGridViewTickets.CurrentRow.Cells["id"].Value);
+
+				OutView edit = new OutView(id, connectionString);
+				edit.ShowDialog();
+			}
+			else
+			{
+				throw new Exception("Не выбран билет для вывода посадочного талона");
 			}
 		}
 	}

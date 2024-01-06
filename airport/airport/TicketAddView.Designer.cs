@@ -50,7 +50,7 @@
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.RowHeadersWidth = 51;
 			this.dataGridView1.RowTemplate.Height = 24;
-			this.dataGridView1.Size = new System.Drawing.Size(369, 163);
+			this.dataGridView1.Size = new System.Drawing.Size(438, 163);
 			this.dataGridView1.TabIndex = 0;
 			this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
 			// 
@@ -66,7 +66,7 @@
 			// 
 			this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.textBoxSearch.Location = new System.Drawing.Point(79, 197);
+			this.textBoxSearch.Location = new System.Drawing.Point(108, 206);
 			this.textBoxSearch.Name = "textBoxSearch";
 			this.textBoxSearch.Size = new System.Drawing.Size(302, 20);
 			this.textBoxSearch.TabIndex = 21;
@@ -77,7 +77,7 @@
 			this.buttonOk.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.buttonOk.FlatAppearance.BorderSize = 0;
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonOk.Location = new System.Drawing.Point(114, 291);
+			this.buttonOk.Location = new System.Drawing.Point(153, 291);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(158, 33);
 			this.buttonOk.TabIndex = 20;
@@ -86,7 +86,7 @@
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(12, 194);
+			this.label1.Location = new System.Drawing.Point(41, 203);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(61, 23);
 			this.label1.TabIndex = 23;
@@ -95,7 +95,7 @@
 			// 
 			// label3
 			// 
-			this.label3.Location = new System.Drawing.Point(12, 241);
+			this.label3.Location = new System.Drawing.Point(41, 250);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(45, 23);
 			this.label3.TabIndex = 25;
@@ -104,7 +104,7 @@
 			// 
 			// label4
 			// 
-			this.label4.Location = new System.Drawing.Point(190, 241);
+			this.label4.Location = new System.Drawing.Point(219, 250);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(57, 23);
 			this.label4.TabIndex = 27;
@@ -114,14 +114,14 @@
 			// comboBoxSeats
 			// 
 			this.comboBoxSeats.FormattingEnabled = true;
-			this.comboBoxSeats.Location = new System.Drawing.Point(253, 241);
+			this.comboBoxSeats.Location = new System.Drawing.Point(282, 250);
 			this.comboBoxSeats.Name = "comboBoxSeats";
 			this.comboBoxSeats.Size = new System.Drawing.Size(128, 24);
 			this.comboBoxSeats.TabIndex = 28;
 			// 
 			// numericUpDown1
 			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(79, 241);
+			this.numericUpDown1.Location = new System.Drawing.Point(108, 250);
 			this.numericUpDown1.Minimum = new decimal(new int[] {
             1,
             0,
@@ -136,13 +136,12 @@
             0,
             0});
 			this.numericUpDown1.ValueChanged += new System.EventHandler(this.NumericUpDown1_ValueChanged);
-			this.numericUpDown1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown1_KeyPress);
 			// 
 			// TicketAddView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(393, 336);
+			this.ClientSize = new System.Drawing.Size(462, 336);
 			this.Controls.Add(this.numericUpDown1);
 			this.Controls.Add(this.comboBoxSeats);
 			this.Controls.Add(this.label4);
