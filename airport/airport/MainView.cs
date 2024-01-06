@@ -26,5 +26,10 @@ namespace airport
 		{
 			new PlanesView().Show();
 		}
+
+		private void buttonPassengers_Click(object sender, EventArgs e)
+		{
+			new TicketsView().Show();
+		}
 	}
 }

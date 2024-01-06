@@ -31,8 +31,8 @@ namespace airport
 
 			textBoxModel.Text = model;
 			textBoxCapacity.Text = capacity.ToString();			
-			textBoxModel.ForeColor = Color.FromArgb(230, 179, 51);
-			textBoxCapacity.ForeColor = Color.FromArgb(230, 179, 51);
+			textBoxModel.ForeColor = Color.Black;
+			textBoxCapacity.ForeColor = Color.Black;
 
 			buttonOk.Text = "обновить";
 			buttonOk.DialogResult = DialogResult.OK;
@@ -47,7 +47,7 @@ namespace airport
 			if (textBoxModel.Text == "Модель")
 			{
 				textBoxModel.Text = "";
-				textBoxModel.ForeColor = Color.FromArgb(230, 179, 51);
+				textBoxModel.ForeColor = Color.Black;
 			}
 		}
 
@@ -56,7 +56,7 @@ namespace airport
 			if (textBoxCapacity.Text == "Вместимость")
 			{
 				textBoxCapacity.Text = "";
-				textBoxCapacity.ForeColor = Color.FromArgb(230, 179, 51);
+				textBoxCapacity.ForeColor = Color.Black;
 			}
 		}
 

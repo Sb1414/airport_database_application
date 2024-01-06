@@ -35,9 +35,9 @@ namespace airport
 			textBoxCity.Text = city;
 			textBoxName.Text = name;
 			textBoxCode.Text = code;
-			textBoxCity.ForeColor = Color.FromArgb(230, 179, 51);
-			textBoxName.ForeColor = Color.FromArgb(230, 179, 51);
-			textBoxCode.ForeColor = Color.FromArgb(230, 179, 51);
+			textBoxCity.ForeColor = Color.Black;
+			textBoxName.ForeColor = Color.Black;
+			textBoxCode.ForeColor = Color.Black;
 
 			buttonOk.Text = "обновить";
 			buttonOk.DialogResult = DialogResult.OK;
@@ -53,7 +53,7 @@ namespace airport
 			if (textBoxCity.Text == "Город")
 			{
 				textBoxCity.Text = "";
-				textBoxCity.ForeColor = Color.FromArgb(230, 179, 51);
+				textBoxCity.ForeColor = Color.Black;
 			}
 		}
 
@@ -62,7 +62,7 @@ namespace airport
 			if (textBoxName.Text == "Название")
 			{
 				textBoxName.Text = "";
-				textBoxName.ForeColor = Color.FromArgb(230, 179, 51);
+				textBoxName.ForeColor = Color.Black;
 			}
 		}
 
@@ -71,7 +71,7 @@ namespace airport
 			if (textBoxCode.Text == "Код")
 			{
 				textBoxCode.Text = "";
-				textBoxCode.ForeColor = Color.FromArgb(230, 179, 51);
+				textBoxCode.ForeColor = Color.Black;
 			}
 		}
 
