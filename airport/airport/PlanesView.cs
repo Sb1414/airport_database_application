@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -194,7 +196,7 @@ namespace airport
 					int plane_id = Convert.ToInt32(dataGridViewPlanes.Rows[e.RowIndex].Cells["id"].Value);
 
 					string query = @"SELECT Flights.Id, DepartureAirportID, A1.City || ' (' || A1.Code || ')' AS DepartureAirport,
-									   ArrivalAirportID, A2.City || ' (' || A2.Code || ')' AS ArrivalAirport, DepartureTime, ArrivalTime
+									   ArrivalAirportID, A2.City || ' (' || A2.Code || ')' AS ArrivalAirport, DepartureTime, ArrivalTime, Price
 									   FROM Flights
 								JOIN Airports A2 on A2.Id = Flights.ArrivalAirportID
 								JOIN Airports A1 on A1.Id = Flights.DepartureAirportID
@@ -234,6 +236,9 @@ namespace airport
 			dataGridViewFlights.Columns["ArrivalAirport"].HeaderText = "Прибытие в";
 			dataGridViewFlights.Columns["DepartureTime"].HeaderText = "Время вылета";
 			dataGridViewFlights.Columns["ArrivalTime"].HeaderText = "Время прибытия";
+			dataGridViewFlights.Columns["Price"].HeaderText = "Стоимость";
+			dataGridViewFlights.Columns["Price"].DefaultCellStyle.Format = "C2";
+			dataGridViewFlights.Columns["Price"].DefaultCellStyle.FormatProvider = new CultureInfo("ru-RU");
 		}
 
 		private void addFlight_Click(object sender, EventArgs e)
@@ -255,20 +260,22 @@ namespace airport
 					int ArrivalAirportID = add.idArrival;
 					string DepartureTime = add.DepartureTime;
 					string ArrivalTime = add.ArrivalTime;
+					double Price = add.Price;
 
 					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
 					{
 						connection.Open();
 
 						using (SQLiteCommand cmd = new SQLiteCommand(
-							"INSERT INTO Flights (PlaneID, DepartureAirportID, ArrivalAirportID, DepartureTime, ArrivalTime) " +
-							"VALUES (@PlaneID, @DepartureAirportID, @ArrivalAirportID, @DepartureTime, @ArrivalTime)", connection))
+							"INSERT INTO Flights (PlaneID, DepartureAirportID, ArrivalAirportID, DepartureTime, ArrivalTime, Price) " +
+							"VALUES (@PlaneID, @DepartureAirportID, @ArrivalAirportID, @DepartureTime, @ArrivalTime, @Price)", connection))
 						{
 							cmd.Parameters.AddWithValue("@DepartureAirportID", DepartureAirportID);
 							cmd.Parameters.AddWithValue("@PlaneID", plane_id);
 							cmd.Parameters.AddWithValue("@ArrivalAirportID", ArrivalAirportID);
 							cmd.Parameters.AddWithValue("@DepartureTime", DepartureTime);
 							cmd.Parameters.AddWithValue("@ArrivalTime", ArrivalTime);
+							cmd.Parameters.AddWithValue("@Price", Price);
 
 							cmd.ExecuteNonQuery();
 						}
@@ -297,27 +304,30 @@ namespace airport
 				int ArrivalAirportID = Convert.ToInt32(dataGridViewFlights.CurrentRow.Cells["ArrivalAirportID"].Value);
 				string DepartureTime = dataGridViewFlights.CurrentRow.Cells["DepartureTime"].Value?.ToString();
 				string ArrivalTime = dataGridViewFlights.CurrentRow.Cells["ArrivalTime"].Value?.ToString();
+				double Price = Convert.ToDouble(dataGridViewFlights.CurrentRow.Cells["Price"].Value);
 
-				FlightsAddView add = new FlightsAddView(connectionString, DepartureAirportID, ArrivalAirportID, DepartureTime, ArrivalTime);
+				FlightsAddView add = new FlightsAddView(connectionString, DepartureAirportID, ArrivalAirportID, DepartureTime, ArrivalTime, Price);
 				if (add.ShowDialog() == DialogResult.OK)
 				{
 					DepartureAirportID = add.idDeparture;
 					ArrivalAirportID = add.idArrival;
 					DepartureTime = add.DepartureTime;
 					ArrivalTime = add.ArrivalTime;
+					Price = add.Price;
 
 					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
 					{
 						connection.Open();
 						using (SQLiteCommand cmd = new SQLiteCommand(
 							"UPDATE Flights SET PlaneID = @PlaneID, DepartureAirportID = @DepartureAirportID, ArrivalAirportID = @ArrivalAirportID, " +
-							"DepartureTime = @DepartureTime, ArrivalTime = @ArrivalTime WHERE Id = @id", connection))
+							"DepartureTime = @DepartureTime, ArrivalTime = @ArrivalTime, Price = @Price WHERE Id = @id", connection))
 						{
 							cmd.Parameters.AddWithValue("@DepartureAirportID", DepartureAirportID);
 							cmd.Parameters.AddWithValue("@PlaneID", plane_id);
 							cmd.Parameters.AddWithValue("@ArrivalAirportID", ArrivalAirportID);
 							cmd.Parameters.AddWithValue("@DepartureTime", DepartureTime);
 							cmd.Parameters.AddWithValue("@ArrivalTime", ArrivalTime);
+							cmd.Parameters.AddWithValue("@Price", Price);
 							cmd.Parameters.AddWithValue("@id", id);
 
 							cmd.ExecuteNonQuery();

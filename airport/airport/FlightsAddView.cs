@@ -30,7 +30,7 @@ namespace airport
 			this.AcceptButton = buttonOk;
 		}
 
-		public FlightsAddView(string connectionString, int DepartureAirportID, int ArrivalAirportID, string DepartureTime, string ArrivalTime)
+		public FlightsAddView(string connectionString, int DepartureAirportID, int ArrivalAirportID, string DepartureTime, string ArrivalTime, double price)
 		{
 			this.connectionString = connectionString;
 			InitializeComponent();
@@ -48,6 +48,8 @@ namespace airport
 			{
 				comboBoxArrivalAirport.SelectedValue = ArrivalAirportID;
 			}
+
+			numericUpDown1.Value = Convert.ToDecimal(price);
 
 			// парсинг и установка даты и времени для вылета
 			DateTime departureDateTime;
@@ -74,6 +76,7 @@ namespace airport
 		public string ArrivalTime => $"{arrivalDay.Value:yyyy-MM-dd} {arrivalTime.Value:HH:mm:ss}";
 		public int idDeparture => comboBoxDepartureAirport.SelectedItem != null ? (int)comboBoxDepartureAirport.SelectedValue : -1;
 		public int idArrival => comboBoxArrivalAirport.SelectedItem != null ? (int)comboBoxArrivalAirport.SelectedValue : -1;
+		public double Price => Convert.ToDouble(numericUpDown1.Value);
 
 		private void checkBox1_CheckedChanged(object sender, EventArgs e)
 		{

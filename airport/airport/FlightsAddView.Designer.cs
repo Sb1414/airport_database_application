@@ -42,6 +42,9 @@
 			this.departureTime = new System.Windows.Forms.DateTimePicker();
 			this.arrivalTime = new System.Windows.Forms.DateTimePicker();
 			this.arrivalDay = new System.Windows.Forms.DateTimePicker();
+			this.label5 = new System.Windows.Forms.Label();
+			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// textBoxDepartureAirport
@@ -58,7 +61,7 @@
 			this.buttonOk.BackColor = System.Drawing.SystemColors.ActiveCaption;
 			this.buttonOk.FlatAppearance.BorderSize = 0;
 			this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonOk.Location = new System.Drawing.Point(102, 323);
+			this.buttonOk.Location = new System.Drawing.Point(105, 383);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(158, 33);
 			this.buttonOk.TabIndex = 8;
@@ -165,11 +168,43 @@
 			this.arrivalDay.Size = new System.Drawing.Size(142, 22);
 			this.arrivalDay.TabIndex = 24;
 			// 
+			// label5
+			// 
+			this.label5.Location = new System.Drawing.Point(46, 315);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(269, 16);
+			this.label5.TabIndex = 26;
+			this.label5.Text = "Стоимость билета на рейс";
+			// 
+			// numericUpDown1
+			// 
+			this.numericUpDown1.Location = new System.Drawing.Point(49, 334);
+			this.numericUpDown1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+			this.numericUpDown1.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			this.numericUpDown1.Name = "numericUpDown1";
+			this.numericUpDown1.Size = new System.Drawing.Size(266, 22);
+			this.numericUpDown1.TabIndex = 27;
+			this.numericUpDown1.Value = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+			// 
 			// FlightsAddView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(373, 378);
+			this.ClientSize = new System.Drawing.Size(373, 428);
+			this.Controls.Add(this.numericUpDown1);
+			this.Controls.Add(this.label5);
 			this.Controls.Add(this.arrivalTime);
 			this.Controls.Add(this.arrivalDay);
 			this.Controls.Add(this.departureTime);
@@ -187,6 +222,7 @@
 			this.Name = "FlightsAddView";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Рейс";
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -207,5 +243,7 @@
 		private System.Windows.Forms.DateTimePicker departureTime;
 		private System.Windows.Forms.DateTimePicker arrivalTime;
 		private System.Windows.Forms.DateTimePicker arrivalDay;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.NumericUpDown numericUpDown1;
 	}
 }

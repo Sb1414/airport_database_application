@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -63,13 +64,14 @@ namespace airport
 					int PassengerID = Convert.ToInt32(dataGridViewPassengers.Rows[e.RowIndex].Cells["id"].Value);
 
 					string query = @"SELECT Tickets.Id, FlightID, A1.City || ' (' || A1.Code || ')' AS DepartureAirport, 
-									   A2.City || ' (' || A2.Code || ')' AS ArrivalAirport, F.DepartureTime, F.ArrivalTime, 
-									   SeatNumber, Price, p2.Model, PassengerID FROM Tickets
+									   A2.City || ' (' || A2.Code || ')' AS ArrivalAirport, F.DepartureTime, F.ArrivalTime,
+									   RowNumber || SC.NameSeat AS seat, (F.Price + SC.Price) AS TotalPrice, p2.Model, PassengerID, SeatID FROM Tickets
 								JOIN Passengers P on P.Id = Tickets.PassengerID
 								JOIN Flights F on F.Id = Tickets.FlightID
 								JOIN Airports A1 on A1.Id = F.DepartureAirportID
 								JOIN Airports A2 on A2.Id = F.ArrivalAirportID
 								JOIN Planes P2 on P2.Id = F.PlaneID
+								JOIN SeatsCategories SC on SC.Id = Tickets.SeatID
 								WHERE PassengerID = @PassengerID";
 
 					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
@@ -102,15 +104,16 @@ namespace airport
 			dataGridViewTickets.Columns["FlightID"].Visible = false;
 			dataGridViewTickets.Columns["PassengerID"].Visible = false;
 			dataGridViewTickets.Columns["ArrivalTime"].Visible = false;
+			dataGridViewTickets.Columns["SeatID"].Visible = false;
 			dataGridViewTickets.Columns["DepartureAirport"].HeaderText = "Отправка из";
 			dataGridViewTickets.Columns["ArrivalAirport"].HeaderText = "Прибытие в";
 			dataGridViewTickets.Columns["DepartureTime"].HeaderText = "Время вылета";
 			// dataGridViewTickets.Columns["ArrivalTime"].HeaderText = "Время прибытия";
-			dataGridViewTickets.Columns["SeatNumber"].HeaderText = "Место";
+			dataGridViewTickets.Columns["seat"].HeaderText = "Место";
 			dataGridViewTickets.Columns["Model"].HeaderText = "Самолёт";
-			dataGridViewTickets.Columns["Price"].HeaderText = "Стоимость билета";
-			dataGridViewTickets.Columns["Price"].DefaultCellStyle.Format = "C2";
-			dataGridViewTickets.Columns["Price"].DefaultCellStyle.FormatProvider = new CultureInfo("ru-RU");
+			dataGridViewTickets.Columns["TotalPrice"].HeaderText = "Стоимость билета";
+			dataGridViewTickets.Columns["TotalPrice"].DefaultCellStyle.Format = "C2";
+			dataGridViewTickets.Columns["TotalPrice"].DefaultCellStyle.FormatProvider = new CultureInfo("ru-RU");
 		}
 
 		private void buttonAdd_Click(object sender, EventArgs e)
@@ -245,6 +248,51 @@ namespace airport
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, "ошибка", MessageBoxButtons.OK);
+			}
+		}
+
+		private void buttonAddTicket_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (dataGridViewPassengers.CurrentRow == null)
+				{
+					throw new Exception("Не выбран пассажир для регистрации на рейс");
+				}
+
+				int PassengerID = Convert.ToInt32(dataGridViewPassengers.CurrentRow.Cells["Id"].Value);
+				/*
+				TicketAddView add = new TicketAddView(connectionString);
+
+				if (add.ShowDialog() == DialogResult.OK)
+				{
+					int FlightID = add.FlightID;
+					string SeatNumber = add.SeatNumber;
+					double Price = add.Price;
+
+					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+					{
+						connection.Open();
+
+						using (SQLiteCommand cmd = new SQLiteCommand(
+							"INSERT INTO Tickets (FlightID, PassengerID, SeatNumber, Price) " +
+							"VALUES (@FlightID, @PassengerID, @SeatNumber, @Price)", connection))
+						{
+							cmd.Parameters.AddWithValue("@FlightID", FlightID);
+							cmd.Parameters.AddWithValue("@PassengerID", PassengerID);
+							cmd.Parameters.AddWithValue("@SeatNumber", SeatNumber);
+							cmd.Parameters.AddWithValue("@Price", Price);
+
+							cmd.ExecuteNonQuery();
+						}
+						LoadPassengers();
+					}
+				}*/
+
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK);
 			}
 		}
 	}

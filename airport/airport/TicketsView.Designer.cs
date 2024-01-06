@@ -31,7 +31,7 @@
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.buttonDeleteFlight = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
+			this.buttonAddTicket = new System.Windows.Forms.Button();
 			this.dataGridViewTickets = new System.Windows.Forms.DataGridView();
 			this.textBoxSearch = new System.Windows.Forms.TextBox();
 			this.buttonDelete = new System.Windows.Forms.Button();
@@ -75,17 +75,18 @@
 			this.button2.Text = "Редактировать билет";
 			this.button2.UseVisualStyleBackColor = false;
 			// 
-			// button3
+			// buttonAddTicket
 			// 
-			this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.button3.FlatAppearance.BorderSize = 0;
-			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button3.Location = new System.Drawing.Point(12, 470);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(179, 26);
-			this.button3.TabIndex = 28;
-			this.button3.Text = "Добавить билет";
-			this.button3.UseVisualStyleBackColor = false;
+			this.buttonAddTicket.BackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.buttonAddTicket.FlatAppearance.BorderSize = 0;
+			this.buttonAddTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddTicket.Location = new System.Drawing.Point(12, 470);
+			this.buttonAddTicket.Name = "buttonAddTicket";
+			this.buttonAddTicket.Size = new System.Drawing.Size(179, 26);
+			this.buttonAddTicket.TabIndex = 28;
+			this.buttonAddTicket.Text = "Добавить билет";
+			this.buttonAddTicket.UseVisualStyleBackColor = false;
+			this.buttonAddTicket.Click += new System.EventHandler(this.buttonAddTicket_Click);
 			// 
 			// dataGridViewTickets
 			// 
@@ -166,7 +167,7 @@
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.buttonDeleteFlight);
 			this.Controls.Add(this.button2);
-			this.Controls.Add(this.button3);
+			this.Controls.Add(this.buttonAddTicket);
 			this.Controls.Add(this.dataGridViewTickets);
 			this.Controls.Add(this.textBoxSearch);
 			this.Controls.Add(this.buttonDelete);
@@ -188,7 +189,7 @@
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Button buttonDeleteFlight;
 		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button buttonAddTicket;
 		private System.Windows.Forms.DataGridView dataGridViewTickets;
 		private System.Windows.Forms.TextBox textBoxSearch;
 		private System.Windows.Forms.Button buttonDelete;
