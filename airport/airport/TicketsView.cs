@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -261,33 +262,33 @@ namespace airport
 				}
 
 				int PassengerID = Convert.ToInt32(dataGridViewPassengers.CurrentRow.Cells["Id"].Value);
-				/*
+				
 				TicketAddView add = new TicketAddView(connectionString);
 
 				if (add.ShowDialog() == DialogResult.OK)
 				{
-					int FlightID = add.FlightID;
-					string SeatNumber = add.SeatNumber;
-					double Price = add.Price;
+					int FlightID = add.FlightsID;
+					int RowNumber = add.SelectedRowNumber;
+					int SeatID = add.SelectedSeatID;
 
 					using (SQLiteConnection connection = new SQLiteConnection(connectionString))
 					{
 						connection.Open();
 
 						using (SQLiteCommand cmd = new SQLiteCommand(
-							"INSERT INTO Tickets (FlightID, PassengerID, SeatNumber, Price) " +
-							"VALUES (@FlightID, @PassengerID, @SeatNumber, @Price)", connection))
+							"INSERT INTO Tickets (FlightID, PassengerID, RowNumber, SeatID) " +
+							"VALUES (@FlightID, @PassengerID, @RowNumber, @SeatID)", connection))
 						{
 							cmd.Parameters.AddWithValue("@FlightID", FlightID);
 							cmd.Parameters.AddWithValue("@PassengerID", PassengerID);
-							cmd.Parameters.AddWithValue("@SeatNumber", SeatNumber);
-							cmd.Parameters.AddWithValue("@Price", Price);
+							cmd.Parameters.AddWithValue("@RowNumber", RowNumber);
+							cmd.Parameters.AddWithValue("@SeatID", SeatID);
 
 							cmd.ExecuteNonQuery();
 						}
 						LoadPassengers();
 					}
-				}*/
+				}
 
 			}
 			catch (Exception ex)

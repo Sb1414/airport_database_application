@@ -131,7 +131,8 @@
 			this.Controls.Add(this.textBoxLastName);
 			this.Controls.Add(this.buttonOk);
 			this.Name = "PassengerAddView";
-			this.Text = "PassengerAddView";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "Пассажир";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
